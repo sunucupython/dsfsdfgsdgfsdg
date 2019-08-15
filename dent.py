@@ -16,6 +16,7 @@ herlink="https://dentdestek.herokuapp.com/aldim"
 btimestamp=int(time.time())
 stimestamp=int(time.time())
 def get_pricelist():
+    global stimestamp
     listem = []
     for i in range(1,1001):
         listem.append(i)
