@@ -75,19 +75,24 @@ def aldim():
         if r.status_code==200:
             return True
     return False
+
 @app.route("/")
 def index():
     return "baslangic t:{}  son kontrol t:{}".format(btimestamp,stimestamp)
 from apscheduler.schedulers.blocking import BlockingScheduler
 def calisma():
+    print("calisiyorum")
     veri = get_pricelist()
     for i in veri:
         if i["price"]<50:
             paketid=i['package_id']
             fiyat = float(i["price"])
             buy(paketid,fiyat)
-sched = BlockingScheduler()
-sched.add_job(calisma, 'interval', seconds=0.5)
-sched.start()
+@app.route("/start")
+def start():
+    sched = BlockingScheduler()
+    sched.add_job(calisma, 'interval', seconds=0.5)
+    sched.start()
+    return "start"
 if __name__=="__main__":
-    app.run(port =80,debug=True)
+    app.run()
