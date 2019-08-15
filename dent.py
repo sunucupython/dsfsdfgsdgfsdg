@@ -86,6 +86,6 @@ def calisma():
             fiyat = float(i["price"])
             buy(paketid,fiyat)
 sched.add_job(calisma, 'interval', seconds=0.5)
-sched.start()
 if __name__=="__main__":
     app.run(port =80,debug=True)
+    sched.start()
