@@ -89,5 +89,5 @@ def calisma():
 if __name__=="__main__":
     sched = BlockingScheduler()
     sched.add_job(calisma, 'interval', seconds=0.5)
-    app.run(port =80,debug=True)
     sched.start()
+    app.run(port =80,debug=True)
