@@ -79,7 +79,6 @@ def aldim():
 def index():
     return "baslangic t:{}  son kontrol t:{}".format(btimestamp,stimestamp)
 from apscheduler.schedulers.blocking import BlockingScheduler
-sched = BlockingScheduler()
 def calisma():
     veri = get_pricelist()
     for i in veri:
@@ -87,7 +86,8 @@ def calisma():
             paketid=i['package_id']
             fiyat = float(i["price"])
             buy(paketid,fiyat)
-sched.add_job(calisma, 'interval', seconds=0.5)
 if __name__=="__main__":
+    sched = BlockingScheduler()
+    sched.add_job(calisma, 'interval', seconds=0.5)
     app.run(port =80,debug=True)
     sched.start()
