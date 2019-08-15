@@ -73,9 +73,12 @@ def aldim():
     while True:
         r = requests.get(herlink)
         if r.status_code==200:
+            dene()
             return True
     return False
-
+def dene():
+    r = requests.get("https://dentdestek.herokuapp.com/start")
+    return true
 @app.route("/")
 def index():
     return "baslangic t:{}  son kontrol t:{}".format(btimestamp,stimestamp)
