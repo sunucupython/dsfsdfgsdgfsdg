@@ -57,7 +57,7 @@ def balance():
 @app.route("/puan")
 def puan():
     try:
-        return balance()
+        return str(balance())
     except:
         return "hata"
 @app.route("/pklist")
