@@ -91,11 +91,8 @@ def calisma():
             paketid=i['package_id']
             fiyat = float(i["price"])
             buy(paketid,fiyat)
-@app.route("/start")
-def start():
-    sched = BlockingScheduler()
-    sched.add_job(calisma, 'interval', seconds=0.5)
-    sched.start()
-    return "start"
+sched = BlockingScheduler()
+sched.add_job(calisma, 'interval', seconds=0.5)
+sched.start()
 if __name__=="__main__":
     app.run()
