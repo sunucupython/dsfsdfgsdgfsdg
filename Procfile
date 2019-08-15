@@ -1,1 +1,1 @@
-web: gunicorn dent:app
+web: gunicorn dent:app --workers 3 --preload
