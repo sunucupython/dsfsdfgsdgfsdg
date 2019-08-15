@@ -1,6 +1,7 @@
 from flask import Flask,json
 import time
 import requests
+app = Flask(__name__)
 class SetEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, set):
@@ -52,7 +53,7 @@ def balance():
         if i["asset"]=="token":
             return i["balance"]
     return False
-app = Flask(__name__)
+
 @app.route("/puan")
 def puan():
     try:
