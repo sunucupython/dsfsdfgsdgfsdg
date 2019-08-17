@@ -46,8 +46,19 @@ def fiyatlist(listem,token):
     r = requests.post(link,headers=headerx,data=str(listem))
     return r.json()
 
-
-
+@app.route("/balance")
+def balance():
+    try:
+        token= request.headers["token"]
+        linkbalance="https://craterapi.com/api/balance"
+        headerx={"User-Agent":Uagent,"Authorization":token,"Content-Type":"""application/json; charset=utf-8"""}
+        r = requests.get(linkbalance,headers=headerx)
+        for i in r.json():
+            if i["asset"]=="token":
+                return str(i["balance"])
+        return False
+    except:
+        return "Hata"
     
 @app.route("/pklist")
 def pklist():
