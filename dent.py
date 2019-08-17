@@ -40,30 +40,37 @@ def paketlist(token):
     r = requests.post(linkpaketlist,headers=headerx,data=data)
     return r.json()
 
-
-def get_oneprice(id,token):
-    listem = []
-    listem.append(id)
+def fiyatlist(listem,token):
     link="https://craterapi.com/api/package/offer/buy"
     headerx={"User-Agent":Uagent,"Authorization":token,"Content-Type":"""application/json; charset=utf-8"""}
     r = requests.post(link,headers=headerx,data=str(listem))
-    return r.json()[0]["price"]
+    return r.json()
+
+
 
     
 @app.route("/pklist")
 def pklist():
     try:
         token= request.headers["token"]
-        paketler = paketlist(token)
+        veriler = paketlist(token)
+        pbilgi_list=[]
         balance = 0
-        donut=[]
-        for i in paketler:
+        pkidler=[]
+        for i in veriler:
             paketid=i["id"]
+            pkidler.append(paketid)
             paketmiktar=i["lotsize"]
-            paketdeger=get_oneprice(paketid,token)
-            balance+=(paketdeger*paketmiktar)
             name = i["carrier"]["name"]+" "+str(i["plan"]["size"])
-            donut.append({"pname":name,"paketmiktar":paketmiktar,"paketfiyat":paketdeger,"deger":paketdeger*paketmiktar})
+            pbilgi_list.append([paketmiktar,name])
+        fiyatlar = fiyatlist(pkidler,token)
+        x=0
+        donut=[]
+        while(x<len(fiyatlar)):
+            paketdeger=fiyatlar[x]["price"]
+            balance+=paketdeger*pbilgi_list[x][0]
+            donut.append({"pname":pbilgi_list[x][1],"paketmiktar":pbilgi_list[x][0],"paketfiyat":paketdeger,"deger":paketdeger*pbilgi_list[x][0]})
+            x+=1
         donut.reverse()
         donut.append({"toplam":balance})
         donut.reverse()
