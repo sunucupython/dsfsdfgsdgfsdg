@@ -53,6 +53,7 @@ def balance():
         linkbalance="https://craterapi.com/api/balance"
         headerx={"User-Agent":Uagent,"Authorization":token,"Content-Type":"""application/json; charset=utf-8"""}
         r = requests.get(linkbalance,headers=headerx)
+        return r.text
         for i in r.json():
             if i["asset"]=="token" and i["ticker"]=="DENT":
                 return str(i["balance"])
