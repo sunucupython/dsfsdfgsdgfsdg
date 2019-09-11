@@ -8,7 +8,7 @@ class SetEncoder(json.JSONEncoder):
         if isinstance(obj, set):
             return list(obj)
         return json.JSONEncoder.default(self, obj)
-Uagent="""Dalvik/2.1.0 (Linux; U; Android 7.1.1; General Mobile 4G Build/NMF26F)"""
+Uagent="""Dalvik/2.1.0 (Linux; U; Android 7.1.1; General Mobile 5G)"""
 app = Flask(__name__)
 @app.route("/wakeup")
 def wakeup():
@@ -54,10 +54,11 @@ def balance():
         headerx={"User-Agent":Uagent,"Authorization":token,"Content-Type":"""application/json; charset=utf-8"""}
         r = requests.get(linkbalance,headers=headerx)
         for i in r.json():
-            if i["asset"]=="token":
+            if i["asset"]=="token" and i["ticker"]=="DENT":
                 return str(i["balance"])
         return False
-    except:
+    except Exception as e:
+        print(e)
         return "Hata"
     
 @app.route("/pklist")
