@@ -8,7 +8,7 @@ class SetEncoder(json.JSONEncoder):
         if isinstance(obj, set):
             return list(obj)
         return json.JSONEncoder.default(self, obj)
-Uagent="""Dalvik/2.1.0 (Linux; U; Android 7.1.1; General Mobile 5G)"""
+Uagent="""Dalvik/2.1.0 (Linux; U; Android 7.1.1; General Mobile 4G Build/NMF26F)"""
 app = Flask(__name__)
 @app.route("/wakeup")
 def wakeup():
