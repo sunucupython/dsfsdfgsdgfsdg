@@ -86,8 +86,8 @@ def pklist():
             donut.append({"pname":pbilgi_list[x][1],"paketmiktar":pbilgi_list[x][0],"paketfiyat":paketdeger,"deger":paketdeger*pbilgi_list[x][0]})
             x+=1
         donut.reverse()
-        donut.append({"toplamPaketSayisi":toplamPaketSayisi})
-        donut.append({"toplam":balance})
+        donut.append({"PaketSayisi":toplamPaketSayisi})
+        donut.append({"toplamDeger":balance})
         donut.reverse()
         return json.dumps(donut, cls=SetEncoder)
     except Exception as e:
