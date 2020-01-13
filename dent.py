@@ -78,12 +78,15 @@ def pklist():
         fiyatlar = fiyatlist(pkidler,token)
         x=0
         donut=[]
+        toplamPaketSayisi=0
         while(x<len(fiyatlar)):
+            toplamPaketSayisi+=1
             paketdeger=fiyatlar[x]["price"]
             balance+=paketdeger*pbilgi_list[x][0]
             donut.append({"pname":pbilgi_list[x][1],"paketmiktar":pbilgi_list[x][0],"paketfiyat":paketdeger,"deger":paketdeger*pbilgi_list[x][0]})
             x+=1
         donut.reverse()
+        donut.append({"toplamPaketSayisi":toplamPaketSayisi})
         donut.append({"toplam":balance})
         donut.reverse()
         return json.dumps(donut, cls=SetEncoder)
