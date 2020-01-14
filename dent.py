@@ -80,7 +80,7 @@ def pklist():
         donut=[]
         toplamPaketSayisi=0
         while(x<len(fiyatlar)):
-            toplamPaketSayisi+=1
+            toplamPaketSayisi+=pbilgi_list[x][0]
             paketdeger=fiyatlar[x]["price"]
             balance+=paketdeger*pbilgi_list[x][0]
             donut.append({"pname":pbilgi_list[x][1],"paketmiktar":pbilgi_list[x][0],"paketfiyat":paketdeger,"deger":paketdeger*pbilgi_list[x][0]})
